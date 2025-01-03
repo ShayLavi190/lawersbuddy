@@ -1,0 +1,12 @@
+**Welcome to our project !**
+
+Couple of things you need to make sure you have before started:
+1. node.js the latest version
+2. vscode
+
+how to install the program:
+1. create termial and type npm i
+2. go back to the main folder and type cd backend and type npm i
+3. go back to the main folder and type cd frontend/app npm i
+
+to run the program open terminal, type cd frontend/app and then type npm run start
