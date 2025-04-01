@@ -1,17 +1,74 @@
-
 body {
   background-color: #ffffff;
   background-size: cover;
   font-family: "Montserrat", sans-serif;
   color: aliceblue;
-  margin: 0; }
+  margin: 0;
+}
 
-p {
+body.high-contrast {
+  background-color: #000000;
+  color: #ffff00; 
+}
+
+body.high-contrast h1,
+body.high-contrast p {
+  color: #ffff00;
+}
+
+body.high-contrast form {
+  background-color: #111111;
+}
+
+body.high-contrast input {
+  background-color: #222222;
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+body.high-contrast button {
+  background-color: #000000;
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+body.high-contrast button.ghost {
+  background-color: transparent;
+  border-color: #ffff00;
+}
+
+body.high-contrast .overlay {
+  background: none;
+  background-color: #000000;
+  color: #ffff00;
+}
+
+/* טקסט רגיל */
+body h1 {
+  font-size: 48px;
+}
+
+body p {
   font-size: 14px;
-  font-weight: 100;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  margin: 20px 0 30px;
+}
+
+/* מצב טקסט מוגדל */
+body.large-text h1 {
+  font-size: 60px;
+}
+
+body.large-text p {
+  font-size: 18px;
+}
+
+body.large-text button {
+  font-size: 16px;
+  padding: 14px 50px;
+}
+
+body.large-text input {
+  font-size: 16px;
+  padding: 14px 18px;
 }
 
 button {
@@ -56,4 +113,3 @@ input {
   margin: 8px 0;
   width: 100%;
 }
-

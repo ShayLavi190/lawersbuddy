@@ -9,7 +9,7 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-
+import "./table.css";
 const DataTablef = ({ rows }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);

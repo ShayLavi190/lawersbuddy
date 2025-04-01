@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import Header from './componants/Header';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -8,7 +8,7 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './stylesAdmin.css';
 import emailjs from '@emailjs/browser';
-
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 import { TextField, Button, MenuItem, FormControl, InputLabel, Select, FormHelperText } from '@mui/material';
 
@@ -25,6 +25,7 @@ function Meeting() {
   const [emailError, setEmailError] = useState('');
   const [meetingLocation, setMeetingLocation] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const { isHighContrast,isLargeText } = useContext(AccessibilityContext);
 
   useEffect(() => {
     const checkAdminPermission = async () => {
@@ -170,11 +171,11 @@ function Meeting() {
         <main className='main-container' style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
           <form
             style={{
-              background: '#263043',
+              background: isHighContrast ? '#000' : '#263043',
               borderRadius: '0.5%',
               maxWidth: '100%',
               width: '80%',
-              backgroundColor: "#323232",
+              color: isHighContrast ? '#ffff00' : '#ffffff',
               textAlign: 'center'
             }}
           >
@@ -183,7 +184,7 @@ function Meeting() {
               <InputLabel
                 id="client-label"
                 sx={{
-                  color: '#9e9ea4',
+                  color: isHighContrast ? '#ffff00' : '#000' ,
                   fontWeight: 'bold',
                   display: 'flex',
                   justifyContent: 'center',
@@ -200,13 +201,11 @@ function Meeting() {
               onChange={(e) => setSelectedClient(e.target.value)}
               label="בחר לקוח"
               sx={{
-                backgroundColor: '#FFFFFF',
-                fontSize: '20px',
-                width: '100%',
+                backgroundColor: isHighContrast ? '#000' : '#FFFFFF',
+                color: isHighContrast ? '#ffff00' : '#000',
+                fontSize: isLargeText ? '22px' : '18px',
+                border: isHighContrast ? '1px solid #ffff00' : 'none',
                 textAlign: 'center',
-                '& .MuiSelect-select': {
-                  textAlign: 'center',
-                },
               }}
               MenuProps={{
                 PaperProps: {
@@ -223,16 +222,16 @@ function Meeting() {
                   <MenuItem
                     key={client.email}
                     value={JSON.stringify(client)}
-                    sx={{ textAlign: 'center' }}
+                    sx={{ textAlign: 'center', color: isHighContrast ? '#ffff00' : '#000', backgroundColor: isHighContrast ? '#000' : '#FFFFFF', }}
                   >
                     {client.full_name}
                   </MenuItem>
                 ))
               ) : (
-                <MenuItem disabled sx={{ textAlign: 'center' }}>No clients available</MenuItem>
+                <MenuItem disabled sx={{ textAlign: 'center', color: isHighContrast ? '#ffff00' : '#000', backgroundColor: isHighContrast ? '#000' : '#FFFFFF', }}>No clients available</MenuItem>
               )}
             </Select>
-                <FormHelperText style={{ color: '#9e9ea4', fontWeight: 'bold',fontSize:'15px', marginBottom: '20px' }}>
+                <FormHelperText style={{ color: isHighContrast ? '#ffff00' : '#000', fontWeight: 'bold',fontSize:'15px', marginBottom: '20px' }}>
                   בחר לקוח שאיתו תרצה לקבוע פגישה
                 </FormHelperText>
               </FormControl>
@@ -244,17 +243,15 @@ function Meeting() {
               fullWidth
               InputLabelProps={{
                 shrink: true,
-                style: { color: '#9e9ea4', fontWeight: 'bold' }
+                style: {color: isHighContrast ? '#ffff00' : '#000' , fontWeight: 'bold' }
               }}
               InputProps={{
                 sx: {
-                  '& .MuiInputBase-input': {
-                    textAlign: 'center',
-                    backgroundColor: '#FFFFFF',
-                    fontSize: '20px',
-                  },
-                },
-              }}
+                  backgroundColor: isHighContrast ? '#000' : '#FFFFFF',
+                  color: isHighContrast ? '#ffff00' : '#000',
+                  fontSize: isLargeText ? '20px' : '16px',
+                  textAlign: 'center'
+                }}}
               value={appointmentDate}
               onChange={(e) => setAppointmentDate(e.target.value)}
               required
@@ -268,17 +265,15 @@ function Meeting() {
                 fullWidth
                 InputLabelProps={{
                   shrink: true,
-                  style: { color: '#9e9ea4', fontWeight: 'bold' }
+                  style: {color: isHighContrast ? '#ffff00' : '#000', fontWeight: 'bold' }
                 }}
                 InputProps={{
                   sx: {
-                    '& .MuiInputBase-input': {
-                      textAlign: 'center',
-                      backgroundColor: '#FFFFFF',
-                      fontSize: '20px',
-                    },
-                  },
-                }}
+                    backgroundColor: isHighContrast ? '#000' : '#FFFFFF',
+                    color: isHighContrast ? '#ffff00' : '#000',
+                    fontSize: isLargeText ? '20px' : '16px',
+                    textAlign: 'center'
+                  }}}
                 value={appointmentTime}
                 onChange={(e) => setAppointmentTime(e.target.value)}
                 required
@@ -291,7 +286,7 @@ function Meeting() {
                 fullWidth
                 InputLabelProps={{
                   style: {
-                    color: '#9e9ea4',
+                    color: isHighContrast ? '#ffff00' : '#000',
                     fontWeight: 'bold',
                     display: 'flex',
                     justifyContent: 'center',
@@ -299,12 +294,12 @@ function Meeting() {
                   },
                 }}
                 InputProps={{
-                  style: {
-                    backgroundColor: '#FFFFFF',
-                    fontSize: '20px',
-                    textAlign: 'center', 
-                  },
-                }}
+                  sx: {
+                    backgroundColor: isHighContrast ? '#000' : '#FFFFFF',
+                    color: isHighContrast ? '#ffff00' : '#000',
+                    fontSize: isLargeText ? '20px' : '16px',
+                    textAlign: 'center'
+                  }}}
                 value={meetingLocation}
                 onChange={(e) => setMeetingLocation(e.target.value)}
                 sx={{ width: '100%', marginBottom: '40px' }}
@@ -319,7 +314,7 @@ function Meeting() {
                 fullWidth
                 InputLabelProps={{
                   style: {
-                    color: '#9e9ea4',
+                    color: isHighContrast ? '#ffff00' : '#000' ,
                     fontWeight: 'bold',
                     display: 'flex',
                     justifyContent: 'center',
@@ -327,12 +322,12 @@ function Meeting() {
                   },
                 }}
                 InputProps={{
-                  style: {
-                    backgroundColor: '#FFFFFF',
-                    fontSize: '20px',
+                  sx: {
+                    backgroundColor: isHighContrast ? '#000' : '#FFFFFF',
+                    color: isHighContrast ? '#ffff00' : '#000',
+                    fontSize: isLargeText ? '20px' : '16px',
                     textAlign: 'center',
-                  },
-                }}
+                  }}}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 sx={{ width: '100%', marginBottom: '20px' }}
@@ -343,6 +338,15 @@ function Meeting() {
                 onClick={handleGenerateMessage}
                 disabled={isGenerating}
                 style={{ marginTop: '10px',marginBottom: '20px' }}
+                sx={{
+                  fontSize: isLargeText ? '18px' : '14px',
+                  backgroundColor: isHighContrast ? '#000' : undefined,
+                  color: isHighContrast ? '#ffff00' : undefined,
+                  border: isHighContrast ? '1px solid #ffff00' : undefined,
+                  '&:hover': {
+                    backgroundColor: isHighContrast ? '#222' : undefined
+                  }
+                }}
               >
                 {isGenerating ? 'Generating...' : 'Generate AI Message'}
               </Button>
@@ -353,6 +357,15 @@ function Meeting() {
               color="primary"
               style={{ width: '600px' }}
               onClick={handleSubmit}
+              sx={{
+                fontSize: isLargeText ? '18px' : '14px',
+                backgroundColor: isHighContrast ? '#000' : undefined,
+                color: isHighContrast ? '#ffff00' : undefined,
+                border: isHighContrast ? '1px solid #ffff00' : undefined,
+                '&:hover': {
+                  backgroundColor: isHighContrast ? '#222' : undefined
+                }
+              }}
             >
               קבע פגישה
             </Button>

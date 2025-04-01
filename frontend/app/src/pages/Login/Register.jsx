@@ -1,12 +1,15 @@
 import React from "react";
-import { useEffect } from 'react';
+import { useEffect,useContext } from 'react';
 import axios from "axios";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 function Register() {
   const [lawyers, setLawyers] = React.useState([]); 
+  const { isHighContrast } = useContext(AccessibilityContext);
+
   useEffect(() => {
     const fetchLawyers = async () => {
       try {
@@ -223,24 +226,41 @@ function Register() {
           fullWidth
           style={{ marginBottom: "10px", marginTop: "10px" }}
         >
-          <InputLabel style={{ color: "black" }} id="sector-select-label">
+          <InputLabel
+            id="sector-select-label"
+            sx={{
+              color: isHighContrast ? "#ffff00" : "#000000",
+            }}
+          >
             עורך דין
           </InputLabel>
+
           <Select
-              labelId="lawyer-select-label"
-              id="lawyer-select"
-              value={state.lawyer}
-              label="Lawyer"
-              name="lawyer"
-              onChange={handleChange}
-              style={{ color: "black" }}
-            >
-              {lawyers.map((lawyer, index) => (
-                <MenuItem key={index} value={lawyer.full_name}>
-                  {lawyer.full_name}
-                </MenuItem>
-              ))}
-            </Select>
+            labelId="lawyer-select-label"
+            id="lawyer-select"
+            value={state.lawyer}
+            label="Lawyer"
+            name="lawyer"
+            onChange={handleChange}
+            sx={{
+              color: isHighContrast ? "#ffff00" : "#000000",
+              backgroundColor: isHighContrast ? "#111" : "inherit",
+              border: isHighContrast ? "1px solid #ffff00" : "none",
+            }}
+          >
+            {lawyers.map((lawyer, index) => (
+              <MenuItem
+                key={index}
+                value={lawyer.full_name}
+                sx={{
+                  color: isHighContrast ? "#ffff00" : "#000000",
+                  backgroundColor: isHighContrast ? "#000" : "inherit",
+                }}
+              >
+                {lawyer.full_name}
+              </MenuItem>
+            ))}
+          </Select>
         </FormControl>
         <button type="submit">הרשמה</button>
       </form>

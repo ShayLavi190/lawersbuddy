@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
@@ -15,6 +15,8 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./componants/Header";
 import Sidebar from "./componants/sideBar";
+import "./editFile.css";
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 function AddFile() {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ function AddFile() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
+  const { isHighContrast } = useContext(AccessibilityContext);
 
   const clearForm = () => {
     setCaseId("");
@@ -310,7 +313,7 @@ function AddFile() {
                 padding: "20px",
                 textAlign: "center",
                 cursor: "pointer",
-                backgroundColor: "whitesmoke",
+                backgroundColor: isHighContrast ? "black" : "whitesmoke",
                 color: "black",
               }}
             >

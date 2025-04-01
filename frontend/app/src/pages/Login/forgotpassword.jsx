@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 const ForgotPassword = () => {
   const [code, setCode] = useState("");
@@ -11,6 +12,7 @@ const ForgotPassword = () => {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { isHighContrast } = useContext(AccessibilityContext);
 
   emailjs.init(process.env.REACT_APP_EMAILJSINIT2);
 
@@ -191,12 +193,15 @@ const ForgotPassword = () => {
         <form
           onSubmit={handleSendConfirmationCode}
           style={{
-            backgroundColor: "white",
             padding: "3rem",
             borderRadius: "12px",
             boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
             width: "400px",
             textAlign: "center",
+          }}
+          sx={{
+            backgroundColor: isHighContrast ? "black" : "white",
+            color: isHighContrast ? "white" : "black",
           }}
         >
           <input
@@ -218,13 +223,16 @@ const ForgotPassword = () => {
         <form
           onSubmit={handleSignIn}
           style={{
-            backgroundColor: "white",
             padding: "3rem",
             borderRadius: "12px",
             boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
             width: "400px",
             textAlign: "center",
             marginTop: "20px",
+          }}
+          sx={{
+            backgroundColor: isHighContrast ? "black" : "white",
+            color: isHighContrast ? "white" : "black",
           }}
         >
           <input

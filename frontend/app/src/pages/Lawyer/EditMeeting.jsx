@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "./componants/Header";
@@ -7,6 +7,7 @@ import "./stylesAdmin.css";
 import Cookies from "js-cookie";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 const EditMeet = () => {
   const location = useLocation();
@@ -14,6 +15,7 @@ const EditMeet = () => {
   const { meeting } = location.state;
   const [editedMeeting, setEditedMeeting] = useState({ ...meeting });
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const { isHighContrast } = useContext(AccessibilityContext);
 
   useEffect(() => {
     const checkAdminPermission = async () => {
@@ -162,7 +164,7 @@ const EditMeet = () => {
                 name="info"
                 value={editedMeeting.info || ""}
                 onChange={handleChange}
-                style={{ textAlign: "center", width: "100%", height: "200px" }}
+                style={{ textAlign: "center", width: "100%", height: "200px", backgroundColor:isHighContrast ? "#000" :"white" , color:isHighContrast ? "#ffff00" : "black"}}
               ></textarea>
 
               <label>מיקום</label>

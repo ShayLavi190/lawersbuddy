@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Header from "./componants/Header";
 import Sidebar from "./componants/sideBar";
 import DataTablef from "./componants/Table";
@@ -8,6 +8,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import "./stylesAdmin.css";
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 function Home() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function Home() {
   const [appointments, setAppointments] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const { isHighContrast } = useContext(AccessibilityContext);
 
   useEffect(() => {
     const checkAdminPermission = async () => {
@@ -161,9 +163,9 @@ function Home() {
               style={{
                 textAlign: "center",
                 fontSize: "25px",
-                color: "#323232",
                 marginBottom: "20px",
               }}
+              sx = {{color: isHighContrast ? "#ffff00" : "#323232"}}
             >
               תיקים
             </h3>
@@ -174,9 +176,9 @@ function Home() {
               style={{
                 textAlign: "center",
                 fontSize: "25px",
-                color: "#323232",
                 marginBottom: "20px",
               }}
+              sx = {{color: isHighContrast ? "#ffff00" : "#323232"}}
             >
               פגישות קרובות
             </h3>

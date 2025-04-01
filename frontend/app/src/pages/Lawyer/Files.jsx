@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import Header from "./componants/Header";
 import "./stylesAdmin.css";
 import axios from "axios";
@@ -10,6 +10,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Button} from '@mui/material';
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 function Files() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Files() {
   const [showModal, setShowModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
-
+  const {isLargeText } = useContext(AccessibilityContext);
   useEffect(() => {
     const checkAdminPermission = async () => {
       const email = Cookies.get("email");
@@ -158,7 +159,7 @@ const handleExpand = (file) => {
             }}>
           <table className="customers-table" 
               style={{
-                width: "100%", 
+                width: isLargeText ? "200%": "100%", 
                 tableLayout: "fixed", 
                 borderCollapse: "collapse",
               }}>
@@ -172,7 +173,7 @@ const handleExpand = (file) => {
                 <col style={{ width: "10%" }} /> 
                 <col style={{ width: "10%" }} />
                 <col style={{ width: "10%" }} />
-                <col style={{ width: "18%" }} /> 
+                <col style={{ width: isLargeText ? "50%":"18%" }} /> 
               </colgroup>
             <thead>
               <tr>

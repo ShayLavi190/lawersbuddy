@@ -17,6 +17,8 @@ import MeetingsC from "./pages/Client/MeetingC";
 import ContactLawyer from "./pages/Client/ContactLawyer";
 import Meetings from "./pages/Lawyer/Meetings";
 import EditMeet from "./pages/Lawyer/EditMeeting";
+import AccessibilityToggle from "./pages/Components/AccessibilityToggle";
+import {AccessibilityProvider} from "./pages/Components/AccessibilityContext";
 
 function App() {
   useEffect(() => {
@@ -32,27 +34,30 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<FirstPage />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/homeLawyer" element={<Home />} />
-          <Route path="/homeClient" element={<HomeC />} />
-          <Route path="/clientsLawyer" element={<Clients />} />
-          <Route path="/contactAdmin" element={<Contact />} />
-          <Route path="/filesLawyer" element={<Files />} />
-          <Route path="/AddFile" element={<AddFile />} />
-          <Route path="/EditFile" element={<EditFile />} />
-          <Route path="/EditMeeting" element={<EditMeet />} />
-          <Route path="/meetingLawyer" element={<Meeting />} />
-          <Route path="/meetings" element={<Meetings />} />
-          <Route path="/expandFile/:caseId" element={<ExpandFile />} />
-          <Route path="/filesClient" element={<FileC/>} />
-          <Route path="/expandFileC/:caseId" element={<ExpandFileC />} />
-          <Route path="/meetingClient" element={<MeetingsC/>} />
-          <Route path="/contactLawyer" element={<ContactLawyer/>} />
-        </Routes>
-      </Router>
+      <AccessibilityProvider>
+        <Router>
+          <AccessibilityToggle />
+          <Routes>
+            <Route path="/" element={<FirstPage />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/homeLawyer" element={<Home />} />
+            <Route path="/homeClient" element={<HomeC />} />
+            <Route path="/clientsLawyer" element={<Clients />} />
+            <Route path="/contactAdmin" element={<Contact />} />
+            <Route path="/filesLawyer" element={<Files />} />
+            <Route path="/AddFile" element={<AddFile />} />
+            <Route path="/EditFile" element={<EditFile />} />
+            <Route path="/EditMeeting" element={<EditMeet />} />
+            <Route path="/meetingLawyer" element={<Meeting />} />
+            <Route path="/meetings" element={<Meetings />} />
+            <Route path="/expandFile/:caseId" element={<ExpandFile />} />
+            <Route path="/filesClient" element={<FileC/>} />
+            <Route path="/expandFileC/:caseId" element={<ExpandFileC />} />
+            <Route path="/meetingClient" element={<MeetingsC/>} />
+            <Route path="/contactLawyer" element={<ContactLawyer/>} />
+          </Routes>
+        </Router>
+      </AccessibilityProvider>
     </div>
   );
 }

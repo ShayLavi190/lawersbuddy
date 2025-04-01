@@ -13,6 +13,7 @@ import logo from "../../Login/assets/logo.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
+import  "./sideBar.css";
 
 function Sidebar() {
   const navigate = useNavigate();

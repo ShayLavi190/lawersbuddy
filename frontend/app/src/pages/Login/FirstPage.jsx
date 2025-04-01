@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext} from "react";
 import "./styles.css";
 import "./animation.css";
 import Login from "./Login";
 import Register from "./Register";
 import { useLocation } from "react-router-dom";
+import { AccessibilityContext } from "../Components/AccessibilityContext";
+
 function FirstPage() {
   const location = useLocation();
+  const { isHighContrast, isLargeText } = useContext(AccessibilityContext);
 
   useEffect(() => {
     window.history.pushState(null, document.title, window.location.href);
@@ -30,8 +33,8 @@ function FirstPage() {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1 style={{ fontSize: "48px" }}>ברוך שובך</h1>
-              <p>
+            <h1 style={{ fontSize: isLargeText ? "60px" : "48px" }}>ברוך שובך</h1>
+            <p>
                 להתחברות יש לעבור למסך ההתחברות ולהזין את פרטיך
               </p>
               <button

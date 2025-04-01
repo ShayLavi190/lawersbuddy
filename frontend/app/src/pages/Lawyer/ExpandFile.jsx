@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import { Button } from "flowbite-react";
 import { HiArrowNarrowRight, HiCalendar } from "react-icons/hi";
+import "./editFile.css"
 const ExpandFile = () => {
   const { caseId } = useParams();
   const navigate = useNavigate();

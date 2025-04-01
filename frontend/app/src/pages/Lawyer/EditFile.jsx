@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import Header from "./componants/Header";
@@ -9,7 +9,8 @@ import Cookies from "js-cookie";
 import { Select, MenuItem, FormControl, InputLabel, Button } from "@mui/material";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { AccessibilityContext } from "../Components/AccessibilityContext";
+import "./editFile.css";
 const EditFile = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const EditFile = () => {
   const [newDocuments, setNewDocuments] = useState([]);
   const [documentsToDelete, setDocumentsToDelete] = useState([]);
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const { isHighContrast, isLargeText } = useContext(AccessibilityContext);
 
   useEffect(() => {
     const checkAdminPermission = async () => {
@@ -164,7 +166,16 @@ const EditFile = () => {
         />
         <main className="main-container">
           <div style={{ padding: "20px" }}>
-            <form style={{ display: "flex", flexDirection: "column", gap: "20px", backgroundColor: "#323232" }}>
+            <form
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+                backgroundColor: isHighContrast ? "#000" : "#323232",
+                color: isHighContrast ? "#ffff00" : "#fff",
+                fontSize: isLargeText ? "18px" : "16px",
+                padding: "20px"
+              }}>
               <label style={{ marginTop: "20px" }}>מספר תיק</label>
               <input
                 type="text"
@@ -296,11 +307,11 @@ const EditFile = () => {
                   padding: "20px",
                   textAlign: "center",
                   cursor: "pointer",
-                  backgroundColor: "whitesmoke",
+                  backgroundColor: isHighContrast ? "black" : "whitesmoke",
                 }}
               >
                 <input {...getInputProps()} />
-                <p style={{color:'black'}}>גרור ושחרר מסמכים כאן</p>
+                <p style={{color: isHighContrast ? "#ffff00" : "black",}}>גרור ושחרר מסמכים כאן</p>
               </div>
               {newDocuments.map((doc, index) => (
                 <p key={index} style={{ color: "green" }}>

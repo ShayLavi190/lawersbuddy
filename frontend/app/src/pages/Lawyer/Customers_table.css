@@ -1,23 +1,54 @@
-/* .table-container {
+/* בסיס */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1d2634;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ניגודיות גבוהה */
+body.high-contrast {
+  background-color: #000;
+  color: #ffff00;
+}
+
+/* טקסט מוגדל */
+body.large-text,
+body.large-text .customers-table th,
+body.large-text .customers-table td,
+body.large-text .main-title,
+body.large-text .customers-table button {
+  font-size: 18px !important;
+}
+
+/* טבלה */
+.customers-table-container {
   width: 100%;
-  margin: 20px 0;
+  overflow-x: auto;
 }
 
 .customers-table {
-  width: 100%;
+  width: max-content;
   border-collapse: collapse;
   text-align: left;
+  table-layout: fixed;
 }
 
 .customers-table th,
 .customers-table td {
   padding: 12px 15px;
   border: 1px solid #ddd;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
+/* מצב רגיל */
 .customers-table th {
   background-color: #42786b;
   font-weight: bold;
+  color: white;
 }
 
 .customers-table tr:nth-child(even) {
@@ -47,18 +78,44 @@
 }
 
 .customers-table button.delete:hover {
-  background-color: #e53935;
-} */
-
-/* CSS for ensuring table spans full width without scrolling */
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #1d2634;
-  color: #ffffff;
-  font-family: "Montserrat", sans-serif;
+  background-color: #8d2c2a;
 }
 
+/* מצב ניגודיות גבוהה */
+body.high-contrast .customers-table th,
+body.high-contrast .customers-table td {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+body.high-contrast .customers-table tr:nth-child(even) {
+  background-color: #111 !important;
+}
+
+body.high-contrast .customers-table tr:hover {
+  background-color: #222 !important;
+}
+
+body.high-contrast .customers-table button {
+  background-color: #000;
+  color: #ffff00;
+  border: 1px solid #ffff00;
+}
+
+body.high-contrast .customers-table button:hover {
+  background-color: #222;
+}
+
+body.high-contrast .customers-table button.delete {
+  background-color: #400;
+}
+
+body.high-contrast .customers-table button.delete:hover {
+  background-color: #800;
+}
+
+/* מבנה העמוד */
 .grid-container {
   display: grid;
   grid-template-columns: 260px 1fr 1fr 1fr;
@@ -101,61 +158,4 @@ body {
 
 .main-title {
   margin-bottom: 20px;
-}
-
-.customers-table-container {
-  width: 100%;
-  overflow-x: auto; /* Enable horizontal scrolling if needed */
-}
-
-.customers-table {
-  width: max-content; /* Ensures table stretches to fit content */
-  border-collapse: collapse;
-  text-align: left;
-  table-layout: fixed; /* Ensures consistent column width */
-}
-
-.customers-table th,
-.customers-table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  white-space: nowrap; /* Prevent text wrapping in cells */
-  text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
-  overflow: hidden; /* Hides overflow for long text */
-}
-
-.customers-table th {
-  background-color: #42786b;
-  font-weight: bold;
-  color: white;
-}
-
-.customers-table tr:nth-child(even) {
-  background-color: #42786b85;
-}
-
-.customers-table tr:hover {
-  background-color: #83a42f8a;
-}
-
-.customers-table button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  border: none;
-  background-color: #56a16c;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.customers-table button:hover {
-  background-color: #004103;
-}
-
-.customers-table button.delete {
-  background-color: #f44336;
-}
-
-.customers-table button.delete:hover {
-  background-color: #8d2c2a;
 }

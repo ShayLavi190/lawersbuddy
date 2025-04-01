@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import Header from '../Lawyer/componants/Header';
 import '../Lawyer/stylesAdmin.css';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TextField, Button } from '@mui/material';
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 function ContactLawyer() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function ContactLawyer() {
   const [name, setName] = useState('');
   const [subject, setSubject] = useState('');
   const [aiPrompt, setAiPrompt] = useState('');
+  const { isHighContrast } = useContext(AccessibilityContext);
 
   useEffect(() => {
     const checkAdminPermission = async () => {
@@ -147,7 +149,7 @@ function ContactLawyer() {
                 }}
                 InputProps={{
                   style: {
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: isHighContrast ? "black" : "whitesmoke",
                     fontSize: '20px'
                   }
                 }}
@@ -169,7 +171,7 @@ function ContactLawyer() {
                 }}
                 InputProps={{
                   style: {
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: isHighContrast ? "black" : "whitesmoke",
                     fontSize: '20px'
                   }
                 }}
@@ -199,7 +201,7 @@ function ContactLawyer() {
                 }}
                 InputProps={{
                   style: {
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: isHighContrast ? "black" : "whitesmoke",
                     fontSize: '20px'
                   }
                 }}

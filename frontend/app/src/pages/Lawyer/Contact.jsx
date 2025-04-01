@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import Header from './componants/Header';
 import './stylesAdmin.css';
 import axios from 'axios';
@@ -8,8 +8,8 @@ import Sidebar from './componants/sideBar';
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import { TextField, Button, MenuItem, FormControl, InputLabel, Select, FormHelperText } from '@mui/material';
+import { AccessibilityContext } from "../Components/AccessibilityContext";
 
 function Contact() {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ function Contact() {
   const [emailError, setEmailError] = useState('');
   const [subject, setSubject] = useState('');
   const [aiPrompt, setAiPrompt] = useState('');
+  const { isHighContrast } = useContext(AccessibilityContext);
 
   useEffect(() => {
     const checkAdminPermission = async () => {
@@ -240,7 +241,7 @@ function Contact() {
             InputProps={{
               sx: {
                 textAlign: "center",
-                backgroundColor: "#FFFFFF",
+                backgroundColor: isHighContrast ? "black" : "whitesmoke",
                 fontSize: "20px",
               },
             }}
@@ -274,7 +275,7 @@ function Contact() {
             InputProps={{
               sx: {
                 textAlign: "center",
-                backgroundColor: "#FFFFFF",
+                backgroundColor: isHighContrast ? "black" : "whitesmoke",
                 fontSize: "20px",
               },
             }}
