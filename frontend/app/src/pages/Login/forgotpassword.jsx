@@ -192,6 +192,8 @@ const ForgotPassword = () => {
       >
         <form
           onSubmit={handleSendConfirmationCode}
+          aria-labelledby="email-section-title"
+          role="form"
           style={{
             padding: "3rem",
             borderRadius: "12px",
@@ -199,21 +201,25 @@ const ForgotPassword = () => {
             width: "400px",
             textAlign: "center",
           }}
-          sx={{
-            backgroundColor: isHighContrast ? "black" : "white",
-            color: isHighContrast ? "white" : "black",
-          }}
         >
+          <h2 id="email-section-title" style={{ color: "black", marginBottom: "1rem" }}>
+            שליחת קוד אימות
+          </h2>
+          <label htmlFor="email-input" className="visually-hidden">כתובת מייל</label>
           <input
-            type="text"
+            id="email-input"
+            type="email"
             placeholder="הזן את כתובת המייל שלך"
             onChange={handleChange}
             name="email"
             value={email}
+            aria-required="true"
+            aria-label="כתובת מייל לשליחת קוד אימות"
             style={{ marginBottom: "1.5rem", padding: "1rem", width: "100%" }}
           />
           <button
             type="submit"
+            aria-label="שלח קוד אימות לכתובת המייל"
             style={{ padding: "0.75rem 1.5rem", marginBottom: "1.5rem" }}
           >
             שלח קוד אימות
@@ -222,6 +228,8 @@ const ForgotPassword = () => {
 
         <form
           onSubmit={handleSignIn}
+          aria-labelledby="reset-section-title"
+          role="form"
           style={{
             padding: "3rem",
             borderRadius: "12px",
@@ -230,29 +238,40 @@ const ForgotPassword = () => {
             textAlign: "center",
             marginTop: "20px",
           }}
-          sx={{
-            backgroundColor: isHighContrast ? "black" : "white",
-            color: isHighContrast ? "white" : "black",
-          }}
         >
+          <h2 id="reset-section-title" style={{ color: "black", marginBottom: "1rem" }}>
+            הזנת קוד וסיסמה חדשה
+          </h2>
+
+          <label htmlFor="code-input" className="visually-hidden">קוד אימות</label>
           <input
+            id="code-input"
             type="text"
             placeholder="קוד אימות"
             onChange={handleChange}
             name="code"
             value={code}
+            aria-required="true"
+            aria-label="קוד אימות שקיבלת במייל"
             style={{ marginBottom: "1.5rem", padding: "1rem", width: "100%" }}
           />
+
+          <label htmlFor="new-password" className="visually-hidden">סיסמה חדשה</label>
           <input
+            id="new-password"
             type="password"
-            placeholder="הזן סיסמה חדש"
+            placeholder="הזן סיסמה חדשה"
             onChange={handleChange}
             name="password"
             value={password}
+            aria-required="true"
+            aria-label="הזן סיסמה חדשה עם לפחות 8 תווים כולל מספר וסימן"
             style={{ marginBottom: "1.5rem", padding: "1rem", width: "100%" }}
           />
+
           <button
             type="submit"
+            aria-label="שנה סיסמה והתחבר למערכת"
             style={{ padding: "0.75rem 1.5rem" }}
           >
             שנה סיסמה

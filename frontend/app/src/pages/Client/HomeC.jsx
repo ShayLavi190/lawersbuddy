@@ -99,66 +99,104 @@ function HomeC() {
   
   
   return (
-    <div className="grid-container">
-      <Header OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)} />
-      <Sidebar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)}
-      />
-      <main className="main-container" style={{ backgroundColor: "#DDD0C8" }}>
-        {/* Cards Section */}
-        <div className="main-cards" style={{marginLeft:'260px',marginBottom:'50px'}}>
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl"}}>
-            <div className="card-inner">
-              <h3>תיקים פתוחים</h3>
-              <BsArrowRepeat className="card_icon" />
-            </div>
-            <h1>{ProcessesnumberO}</h1>
-          </div>
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl" }}>
-            <div className="card-inner">
-              <h3>תיקים סגורים</h3>
-              <BsCheckCircle className="card_icon" />
-            </div>
-            <h1>{ProcessesnumberC}</h1>
-          </div>
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl" }}>
-            <div className="card-inner">
-              <h3 style={{ direction: "rtl" }}>תשלומים שבוצעו</h3>
-              <BsCash className="card_icon" style={{ direction: "ltr" }} />
-            </div>
-            <h1>{MoneyCollected}</h1>
-          </div>
+    <div className="grid-container" role="presentation">
+  <Header OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)} />
+  <Sidebar
+    openSidebarToggle={openSidebarToggle}
+    OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)}
+  />
+
+  <main
+    className="main-container"
+    style={{ backgroundColor: "#DDD0C8" }}
+    role="main"
+    aria-label="לוח מחוונים - עורך דין"
+  >
+    {/* Cards Section */}
+    <section
+      className="main-cards"
+      style={{ marginLeft: "260px", marginBottom: "50px" }}
+      role="region"
+      aria-labelledby="dashboard-stats"
+    >
+      <h2 id="dashboard-stats" className="visually-hidden">סטטיסטיקות כלליות</h2>
+
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        role="article"
+        tabIndex={0}
+        aria-label={`מספר תיקים פתוחים: ${ProcessesnumberO}`}
+      >
+        <div className="card-inner">
+          <h3>תיקים פתוחים</h3>
+          <BsArrowRepeat className="card_icon" aria-hidden="true" />
         </div>
-          {/* Data Table */}
-          <div>
-            <h3
-              style={{
-                textAlign: "center",
-                fontSize: "25px",
-                color: "#323232",
-                marginBottom: "20px",
-              }}
-            >
-              תיקים
-            </h3>
-            <DataTablef rows={files} />
-          </div>
-          <div>
-            <h3
-              style={{
-                textAlign: "center",
-                fontSize: "25px",
-                color: "#323232",
-                marginBottom: "20px",
-              }}
-            >
-              פגישות קרובות
-            </h3>
-            <TableDates rows={appointments} />
-          </div>
-      </main>
-    </div>
+        <h1>{ProcessesnumberO}</h1>
+      </div>
+
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        role="article"
+        tabIndex={0}
+        aria-label={`מספר תיקים סגורים: ${ProcessesnumberC}`}
+      >
+        <div className="card-inner">
+          <h3>תיקים סגורים</h3>
+          <BsCheckCircle className="card_icon" aria-hidden="true" />
+        </div>
+        <h1>{ProcessesnumberC}</h1>
+      </div>
+
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        role="article"
+        tabIndex={0}
+        aria-label={`סה"כ תשלומים שבוצעו: ${MoneyCollected} ש"ח`}
+      >
+        <div className="card-inner">
+          <h3>תשלומים שבוצעו</h3>
+          <BsCash className="card_icon" style={{ direction: "ltr" }} aria-hidden="true" />
+        </div>
+        <h1>{MoneyCollected}</h1>
+      </div>
+    </section>
+
+    {/* Tables Section */}
+    <section role="region" aria-labelledby="cases-table">
+      <h3
+        id="cases-table"
+        style={{
+          textAlign: "center",
+          fontSize: "25px",
+          color: "#323232",
+          marginBottom: "20px",
+        }}
+      >
+        תיקים
+      </h3>
+      <DataTablef rows={files} />
+    </section>
+
+    <section role="region" aria-labelledby="appointments-table">
+      <h3
+        id="appointments-table"
+        style={{
+          textAlign: "center",
+          fontSize: "25px",
+          color: "#323232",
+          marginBottom: "20px",
+        }}
+      >
+        פגישות קרובות
+      </h3>
+      <TableDates rows={appointments} />
+    </section>
+  </main>
+</div>
+
   );
 }
 

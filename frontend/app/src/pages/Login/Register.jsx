@@ -183,54 +183,89 @@ function Register() {
   return (
     <>
     <div className="form-container sign-up-container">
-      <form onSubmit={handleOnSubmit} style={{color:'black'}}>
-        <h1 className="titleb" style={{ fontSize: "48px" }}>
+      <form
+        onSubmit={handleOnSubmit}
+        style={{ color: "black" }}
+        aria-labelledby="register-form-title"
+        role="form"
+      >
+        <h1 id="register-form-title" className="titleb" style={{ fontSize: "48px" }}>
           צור משתמש חדש
         </h1>
+
+        <label htmlFor="name" className="visually-hidden">שם מלא</label>
         <input
+          id="name"
           type="text"
           name="name"
           value={state.name}
           onChange={handleChange}
           placeholder="שם מלא"
+          required
+          aria-required="true"
+          aria-label="שם מלא"
         />
+
+        <label htmlFor="email" className="visually-hidden">אימייל</label>
         <input
+          id="email"
           type="email"
           name="email"
           value={state.email}
           onChange={handleChange}
           placeholder="אימייל"
+          required
+          aria-required="true"
+          aria-label="כתובת אימייל"
         />
+
+        <label htmlFor="password" className="visually-hidden">סיסמה</label>
         <input
+          id="password"
           type="password"
           name="password"
           value={state.password}
           onChange={handleChange}
           placeholder="סיסמה"
+          required
+          aria-required="true"
+          aria-label="סיסמה עם 8 תווים לפחות כולל סימנים וספרות"
         />
+
+        <label htmlFor="country" className="visually-hidden">ארץ</label>
         <input
+          id="country"
           type="text"
           name="country"
           value={state.country}
           onChange={handleChange}
           placeholder="ארץ"
+          required
+          aria-required="true"
+          aria-label="ארץ מגורים"
         />
+
+        <label htmlFor="id" className="visually-hidden">תעודת זהות</label>
         <input
+          id="id"
           type="text"
           name="id"
           value={state.id}
           onChange={handleChange}
           placeholder="תעודת זהות"
+          required
+          aria-required="true"
+          aria-label="מספר תעודת זהות"
         />
+
         <FormControl
           fullWidth
           style={{ marginBottom: "10px", marginTop: "10px" }}
+          aria-labelledby="lawyer-select-label"
         >
           <InputLabel
-            id="sector-select-label"
-            sx={{
-              color: isHighContrast ? "#ffff00" : "#000000",
-            }}
+            id="lawyer-select-label"
+            sx={{ color: isHighContrast ? "#ffff00" : "#000000" }}
           >
             עורך דין
           </InputLabel>
@@ -242,6 +277,10 @@ function Register() {
             label="Lawyer"
             name="lawyer"
             onChange={handleChange}
+            inputProps={{
+              "aria-label": "בחר עורך דין מתוך הרשימה",
+              required: true,
+            }}
             sx={{
               color: isHighContrast ? "#ffff00" : "#000000",
               backgroundColor: isHighContrast ? "#111" : "inherit",
@@ -262,7 +301,8 @@ function Register() {
             ))}
           </Select>
         </FormControl>
-        <button type="submit">הרשמה</button>
+
+        <button type="submit" aria-label="שלח טופס הרשמה">הרשמה</button>
       </form>
     </div>
     </>

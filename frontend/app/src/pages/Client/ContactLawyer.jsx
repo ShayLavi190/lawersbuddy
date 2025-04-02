@@ -126,105 +126,135 @@ function ContactLawyer() {
 
   return (
     <>
-      <ToastContainer />
-      <div className='grid-container' style={{ backgroundColor: "#DDD0C8" }}>
-        <Header />
-        <Sidebar />
-        <main className='main-container' style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <form style={{
-            background: '#263043',
-            borderRadius: '0.5%',
-            maxWidth: '100%',
-            width: '80%',
-            backgroundColor: "#323232",
-            textAlign: 'center'
-          }}>
-            {/* Subject */}
-            <div className='form-group' style={{ marginBottom: '40px', width: '600px' }}>
-              <TextField
-                label="נושא"
-                fullWidth
-                InputLabelProps={{
-                  style: { color: '#9e9ea4', fontWeight: 'bold' }
-                }}
-                InputProps={{
-                  style: {
-                    backgroundColor: isHighContrast ? "black" : "whitesmoke",
-                    fontSize: '20px'
-                  }
-                }}
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                sx={{ width: '100%', marginBottom: '40px' }}
-              />
-            </div>
+  <ToastContainer />
+  <div className='grid-container' style={{ backgroundColor: "#DDD0C8" }}>
+    <Header />
+    <Sidebar />
+    <main
+      className='main-container'
+      style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+      role="main"
+      aria-label="טופס שליחת הודעה"
+    >
+      <form
+        role="form"
+        aria-labelledby="form-title"
+        style={{
+          background: '#263043',
+          borderRadius: '0.5%',
+          maxWidth: '100%',
+          width: '80%',
+          backgroundColor: "#323232",
+          textAlign: 'center'
+        }}
+        onSubmit={handleSubmit}
+      >
+        <h2 id="form-title" style={{ color: "#fff", fontSize: "28px", marginBottom: "30px" }}>
+          טופס שליחת הודעה
+        </h2>
 
-            {/* AI Prompt */}
-            <div className='form-group' style={{ marginBottom: '40px', width: '600px' }}>
-              <TextField
-                label="בקשה ל-AI"
-                multiline
-                rows={2}
-                fullWidth
-                InputLabelProps={{
-                  style: { color: '#9e9ea4', fontWeight: 'bold' }
-                }}
-                InputProps={{
-                  style: {
-                    backgroundColor: isHighContrast ? "black" : "whitesmoke",
-                    fontSize: '20px'
-                  }
-                }}
-                value={aiPrompt}
-                onChange={(e) => setAiPrompt(e.target.value)}
-                sx={{ width: '100%', marginBottom: '20px' }}
-              />
-              <Button
-                variant="contained"
-                color="secondary"
-                style={{ width: '600px' }}
-                onClick={handleGenerateMessage}
-              >
-                צור הודעה עם בינה מלאכותית
-              </Button>
-            </div>
+        {/* Subject */}
+        <div className='form-group' style={{ marginBottom: '40px', width: '600px' }}>
+          <TextField
+            id="subject"
+            label="נושא"
+            fullWidth
+            inputProps={{
+              'aria-required': true,
+              'aria-label': 'שדה נושא ההודעה'
+            }}
+            InputLabelProps={{
+              style: { color: '#9e9ea4', fontWeight: 'bold' }
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: isHighContrast ? "black" : "whitesmoke",
+                fontSize: '20px'
+              }
+            }}
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            sx={{ width: '100%', marginBottom: '40px' }}
+          />
+        </div>
 
-            {/* Description */}
-            <div className='form-group' style={{ marginBottom: '40px', width: '600px' }}>
-              <TextField
-                label="תוכן ההודעה"
-                multiline
-                rows={4}
-                fullWidth
-                InputLabelProps={{
-                  style: { color: '#9e9ea4', fontWeight: 'bold' }
-                }}
-                InputProps={{
-                  style: {
-                    backgroundColor: isHighContrast ? "black" : "whitesmoke",
-                    fontSize: '20px'
-                  }
-                }}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                sx={{ width: '100%', marginBottom: '40px' }}
-              />
-            </div>
+        {/* AI Prompt */}
+        <div className='form-group' style={{ marginBottom: '40px', width: '600px' }}>
+          <TextField
+            id="aiPrompt"
+            label="בקשה ל-AI"
+            multiline
+            rows={2}
+            fullWidth
+            inputProps={{
+              'aria-label': 'בקשת עזרה מבינה מלאכותית'
+            }}
+            InputLabelProps={{
+              style: { color: '#9e9ea4', fontWeight: 'bold' }
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: isHighContrast ? "black" : "whitesmoke",
+                fontSize: '20px'
+              }
+            }}
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            sx={{ width: '100%', marginBottom: '20px' }}
+          />
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ width: '600px' }}
+            onClick={handleGenerateMessage}
+            aria-label="צור הודעה עם בינה מלאכותית"
+          >
+            צור הודעה עם בינה מלאכותית
+          </Button>
+        </div>
 
-            {/* Send Button */}
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              style={{ width: '600px' }}
-              onClick={handleSubmit}
-            >
-              שלח הודעה
-            </Button>
-          </form>
-        </main>
-      </div>
-    </>
+        {/* Description */}
+        <div className='form-group' style={{ marginBottom: '40px', width: '600px' }}>
+          <TextField
+            id="description"
+            label="תוכן ההודעה"
+            multiline
+            rows={4}
+            fullWidth
+            inputProps={{
+              'aria-required': true,
+              'aria-label': 'תוכן ההודעה'
+            }}
+            InputLabelProps={{
+              style: { color: '#9e9ea4', fontWeight: 'bold' }
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: isHighContrast ? "black" : "whitesmoke",
+                fontSize: '20px'
+              }
+            }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            sx={{ width: '100%', marginBottom: '40px' }}
+          />
+        </div>
+
+        {/* Send Button */}
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          style={{ width: '600px' }}
+          aria-label="שלח את ההודעה"
+        >
+          שלח הודעה
+        </Button>
+      </form>
+    </main>
+  </div>
+</>
+
   );
 }
 
