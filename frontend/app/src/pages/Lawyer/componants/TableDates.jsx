@@ -29,43 +29,52 @@ const DataTable = ({ rows }) => {
   );
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="table with pagination">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">שם לקוח</TableCell>
-              <TableCell align="center">תאריך</TableCell>
-              <TableCell align="center">שעה</TableCell>
-              <TableCell align="center">מיקום</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paginatedRows.map((row, index) => (
-              <TableRow
-                key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{row.client}</TableCell>
-                <TableCell align="center">{row.date}</TableCell>
-                <TableCell align="center">{row.time}</TableCell>
-                <TableCell align="center">{row.location}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        tabIndex={0}
-      />
-    </Paper>
+    <Paper
+  sx={{ width: "100%", overflow: "hidden" }}
+  role="region"
+  aria-label="טבלת פגישות עם ניווט עמודים"
+>
+  <TableContainer>
+    <Table sx={{ minWidth: 650 }} aria-label="טבלת פגישות">
+      <TableHead>
+        <TableRow>
+          <TableCell align="center" scope="col">שם לקוח</TableCell>
+          <TableCell align="center" scope="col">תאריך</TableCell>
+          <TableCell align="center" scope="col">שעה</TableCell>
+          <TableCell align="center" scope="col">מיקום</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+  {paginatedRows.map((row, index) => (
+    <TableRow
+      key={index}
+      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      tabIndex={0}
+      aria-label={`פגישה עם ${row.client}, בתאריך ${row.date}, בשעה ${row.time}, במיקום ${row.location}`}
+    >
+      <TableCell align="center" role="cell">{row.client}</TableCell>
+      <TableCell align="center" role="cell">{row.date}</TableCell>
+      <TableCell align="center" role="cell">{row.time}</TableCell>
+      <TableCell align="center" role="cell">{row.location}</TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+
+    </Table>
+  </TableContainer>
+
+  <TablePagination
+    rowsPerPageOptions={[5, 10, 25]}
+    component="div"
+    count={rows.length}
+    rowsPerPage={rowsPerPage}
+    page={page}
+    onPageChange={handleChangePage}
+    onRowsPerPageChange={handleChangeRowsPerPage}
+    aria-label="בקרת עמודים בטבלת הפגישות"
+  />
+</Paper>
+
   );
 };
 

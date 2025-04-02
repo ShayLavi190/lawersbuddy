@@ -160,181 +160,195 @@ function AddFile() {
 
   return (
     <>
-      <ToastContainer />
-      <div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
-        <Header />
-        <Sidebar />
-        <main
-          className="main-container"
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
-          <form
-            onSubmit={handleSubmit}
+  <ToastContainer />
+  <div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
+    <Header />
+    <Sidebar />
+    <main
+      className="main-container"
+      style={{ width: "100%", display: "flex", justifyContent: "center" }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        aria-labelledby="form-title"
+        role="form"
+        style={{
+          background: "#263043",
+          borderRadius: "0.5%",
+          maxWidth: "100%",
+          width: "80%",
+          backgroundColor: "#323232",
+          textAlign: "center",
+          gap: "13px",
+          height: "100vh",
+        }}
+      >
+        <h1 id="form-title" style={{ color: "white", fontSize: "1.5rem" }}>
+          טופס יצירת תיק חדש
+        </h1>
+
+        {/* בחר לקוח */}
+        <div className="form-group" style={{ width: "600px" }}>
+          <FormControl fullWidth required aria-required="true">
+            <InputLabel id="client-select-label">בחר לקוח</InputLabel>
+            <Select
+              labelId="client-select-label"
+              id="client-select"
+              value={selectedClient}
+              onChange={(e) => setSelectedClient(e.target.value)}
+              inputProps={{
+                "aria-label": "בחר לקוח מהרשימה",
+              }}
+              style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+            >
+              {clients.map((client) => (
+                <MenuItem key={client.id} value={client.id}>
+                  {client.full_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+
+        {/* שאר השדות */}
+        <div className="form-group" style={{ width: "600px" }}>
+          <TextField
+            label="מספר תיק"
+            fullWidth
+            id="case-id"
+            aria-required="true"
+            required
+            value={caseId}
+            onChange={(e) => setCaseId(e.target.value)}
+            InputProps={{
+              style: {
+                textAlign: "center",
+                backgroundColor: "whitesmoke",
+                borderRadius: "5px",
+              },
+            }}
+            inputProps={{ "aria-label": "מספר תיק" }}
+          />
+        </div>
+
+        <div className="form-group" style={{ width: "600px" }}>
+          <TextField
+            label="כותרת תיק"
+            fullWidth
+            id="case-title"
+            required
+            aria-required="true"
+            value={caseTitle}
+            onChange={(e) => setCaseTitle(e.target.value)}
+            inputProps={{ "aria-label": "כותרת תיק" }}
+            style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+          />
+        </div>
+
+        <div className="form-group" style={{ width: "600px" }}>
+          <TextField
+            label="תאריך פתיחה"
+            type="date"
+            fullWidth
+            id="open-date"
+            required
+            aria-required="true"
+            InputLabelProps={{ shrink: true }}
+            value={openDate}
+            onChange={(e) => setOpenDate(e.target.value)}
+            inputProps={{ "aria-label": "תאריך פתיחה" }}
+            style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+          />
+        </div>
+
+        <div className="form-group" style={{ width: "600px" }}>
+          <FormControl fullWidth required aria-required="true">
+            <InputLabel id="status-label">סטטוס תיק</InputLabel>
+            <Select
+              labelId="status-label"
+              id="status-select"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              inputProps={{ "aria-label": "בחר סטטוס תיק" }}
+              style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+            >
+              <MenuItem value="פתוח">פתוח</MenuItem>
+              <MenuItem value="סגור">סגור</MenuItem>
+              <MenuItem value="בערעור">בערעור</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+
+        {/* שדות נוספים */}
+        {[ 
+          { label: "סוג תיק", value: caseType, set: setCaseType },
+          { label: "תובע", value: plaintiff, set: setPlaintiff },
+          { label: "נתבע", value: defendant, set: setDefendant },
+          { label: "שם בית משפט", value: courtName, set: setCourtName },
+          { label: "שופטים (מופרדים בפסיקים)", value: judges, set: setJudges },
+        ].map((field, idx) => (
+          <div className="form-group" style={{ width: "600px" }} key={idx}>
+            <TextField
+              label={field.label}
+              fullWidth
+              required
+              aria-required="true"
+              value={field.value}
+              onChange={(e) => field.set(e.target.value)}
+              inputProps={{ "aria-label": field.label }}
+              style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
+            />
+          </div>
+        ))}
+
+        {/* העלאת קבצים */}
+        <div className="form-group" style={{ width: "600px" }}>
+          <div
+            {...getRootProps()}
+            role="button"
+            tabIndex={0}
+            aria-label="העלה קבצים לתיק"
             style={{
-              background: "#263043",
-              borderRadius: "0.5%",
-              maxWidth: "100%",
-              width: "80%",
-              backgroundColor: "#323232",
+              border: "2px dashed #ccc",
+              padding: "20px",
               textAlign: "center",
-              gap: "13px",
-              height: "100vh",
+              cursor: "pointer",
+              backgroundColor: isHighContrast ? "black" : "whitesmoke",
+              color: "black",
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                getInputProps().onClick?.(e);
+              }
             }}
           >
-            <div className="form-group" style={{ width: "600px" }}>
-              <FormControl fullWidth required>
-                <InputLabel id="client-select-label">בחר לקוח</InputLabel>
-                <Select
-                  labelId="client-select-label"
-                  value={selectedClient}
-                  onChange={(e) => setSelectedClient(e.target.value)}
-                  style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-                >
-                  {clients.map((client) => (
-                    <MenuItem key={client.id} value={client.id}>
-                      {client.full_name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="מספר תיק"
-                fullWidth
-                value={caseId}
-                onChange={(e) => setCaseId(e.target.value)}
-                required
-                InputProps={{
-                  style: { textAlign: "center", backgroundColor: "whitesmoke", borderRadius: "5px" },
-                }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="כותרת תיק"
-                fullWidth
-                value={caseTitle}
-                onChange={(e) => setCaseTitle(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="תאריך פתיחה"
-                type="date"
-                fullWidth
-                InputLabelProps={{ shrink: true }}
-                value={openDate}
-                onChange={(e) => setOpenDate(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <FormControl fullWidth required>
-                <InputLabel id="status-label">סטטוס תיק</InputLabel>
-                <Select
-                  labelId="status-label"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-                >
-                  <MenuItem value="פתוח">פתוח</MenuItem>
-                  <MenuItem value="סגור">סגור</MenuItem>
-                  <MenuItem value="בערעור">בערעור</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="סוג תיק"
-                fullWidth
-                value={caseType}
-                onChange={(e) => setCaseType(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="תובע"
-                fullWidth
-                value={plaintiff}
-                onChange={(e) => setPlaintiff(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="נתבע"
-                fullWidth
-                value={defendant}
-                onChange={(e) => setDefendant(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="שם בית משפט"
-                fullWidth
-                value={courtName}
-                onChange={(e) => setCourtName(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-
-            <div className="form-group" style={{ width: "600px" }}>
-              <TextField
-                label="שופטים (מופרדים בפסיקים)"
-                fullWidth
-                value={judges}
-                onChange={(e) => setJudges(e.target.value)}
-                required
-                style={{ backgroundColor: "whitesmoke", borderRadius: "5px" }}
-              />
-            </div>
-            <div className="form-group" style={{ width: "600px" }}>
-            <div
-              {...getRootProps()}
-              style={{
-                border: "2px dashed #ccc",
-                padding: "20px",
-                textAlign: "center",
-                cursor: "pointer",
-                backgroundColor: isHighContrast ? "black" : "whitesmoke",
-                color: "black",
-              }}
-            >
-              <input {...getInputProps()} />
-              <p>הוסף מסמכים נלווים</p>
-            </div>
-            {selectedFiles.length > 0 && (
-              <p style={{ color: "green" }}>
-                {selectedFiles.map(
-                  (file, index) => `${file.name} (${(file.size / 1024).toFixed(2)} KB)`
-                ).join(" | ")}
-              </p>
-            )}
+            <input {...getInputProps()} />
+            <p>הוסף מסמכים נלווים</p>
           </div>
-            <Button type="submit" variant="contained" color="primary" style={{ width: "600px" }}>
-              הוסף תיק
-            </Button>
-          </form>
-        </main>
-      </div>
-    </>
+          {selectedFiles.length > 0 && (
+            <p style={{ color: "green" }}>
+              {selectedFiles.map(
+                (file, index) => `${file.name} (${(file.size / 1024).toFixed(2)} KB)`
+              ).join(" | ")}
+            </p>
+          )}
+        </div>
+
+        {/* כפתור שליחה */}
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          aria-label="שלח טופס להוספת תיק חדש"
+          style={{ width: "600px" }}
+        >
+          הוסף תיק
+        </Button>
+      </form>
+    </main>
+  </div>
+</>
+
   );
 }
 

@@ -59,9 +59,10 @@ function FileC() {
   };
 
   return (
-<div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
+    <div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
   <Header OpenSidebar={OpenSidebar} />
   <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+
   <main className="main-container" role="main" aria-label="ניהול תיקים">
     <div
       className="table-container"
@@ -74,7 +75,9 @@ function FileC() {
         overflowX: "auto",
       }}
     >
-      <h2 id="files-table-title" className="visually-hidden">טבלת תיקים</h2>
+      <h2 id="files-table-title" className="visually-hidden">
+        טבלת תיקים
+      </h2>
 
       <table
         className="customers-table"
@@ -88,33 +91,25 @@ function FileC() {
       >
         <thead>
           <tr role="row">
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              מספר
-            </th>
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              נושא
-            </th>
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              תאריך פתיחה
-            </th>
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              סטאטוס
-            </th>
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              בית משפט
-            </th>
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              שופטים
-            </th>
-            <th role="columnheader" scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>
-              רחב
-            </th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>מספר</th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>נושא</th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>תאריך פתיחה</th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>סטאטוס</th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>בית משפט</th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>שופטים</th>
+            <th scope="col" style={{ backgroundColor: "#323232", textAlign: "center" }}>רחב</th>
           </tr>
         </thead>
 
         <tbody>
-          {files.map((file) => (
-            <tr key={file.caseId} role="row" style={{ backgroundColor: "whitesmoke", color: "black" }}>
+          {files.map((file, index) => (
+            <tr
+              key={file.caseId || index}
+              tabIndex={0}
+              role="row"
+              aria-label={`תיק מספר ${file.caseId}, נושא ${file.caseTitle}, נפתח בתאריך ${new Date(file.openDate).toLocaleDateString()}, סטאטוס ${file.status}, בית משפט ${file.courtName}, שופטים: ${file.judges.join(", ")}`}
+              style={{ backgroundColor: "whitesmoke", color: "black" }}
+            >
               <td role="cell" style={{ textAlign: "center" }}>{file.caseId}</td>
               <td role="cell" style={{ textAlign: "center" }}>{file.caseTitle}</td>
               <td role="cell" style={{ textAlign: "center" }}>
@@ -139,6 +134,7 @@ function FileC() {
     </div>
   </main>
 </div>
+
 
   );
 }

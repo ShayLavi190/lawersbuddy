@@ -99,35 +99,37 @@ function Sidebar() {
           X
         </span>
       </div>
-
       <ul className="sidebar-list">
-        {menuItems.map((item, index) => {
-          const isActive = location.pathname === item.path;
-          const iconColor = iconColors[item.path] || "#white"; 
+      {menuItems.map((item, index) => {
+        const isActive = location.pathname === item.path;
+        const iconColor = iconColors[item.path] || "#white";
 
-          return (
-            <li
-              className="sidebar-list-item"
-              key={index}
-              data-testid={`link-${item.label.toLowerCase()}`}
-              onClick={() => navigate(item.path, { replace: true })}
-              style={{ cursor: 'pointer', marginLeft:'5px' }}
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  navigate(item.path, { replace: true });
-                }
-              }}
-            >
-              <item.icon
-                className="icon"
-                style={{ color: isActive ? iconColor : "#white", marginRight: '12px' }} 
-              />
-              {item.label}
-            </li>
-          );
-        })}
-      </ul>
+        return (
+          <li
+            className="sidebar-list-item"
+            key={index}
+            role="link"
+            aria-label={`נווט אל ${item.label}`}
+            tabIndex={0}
+            data-testid={`link-${item.label.toLowerCase()}`}
+            onClick={() => navigate(item.path, { replace: true })}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                navigate(item.path, { replace: true });
+              }
+            }}
+            style={{ cursor: "pointer", marginLeft: "5px" }}
+          >
+            <item.icon
+              className="icon"
+              style={{ color: isActive ? iconColor : "#ffffff", marginRight: "12px" }}
+              aria-hidden="true"
+            />
+            {item.label}
+          </li>
+        );
+      })}
+    </ul>
 
     </aside>
   );

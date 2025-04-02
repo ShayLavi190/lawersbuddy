@@ -185,112 +185,116 @@ const Clients = () => {
     ? filteredPeople
     : people;
   return (
-    <div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
-      <Header OpenSidebar={OpenSidebar} />
-      <Sidebar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
+<div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
+  <Header OpenSidebar={OpenSidebar} />
+  <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+
+  <main className="main-container" role="main" aria-label="רשימת לקוחות">
+    <div className="search-bars" style={{ width: '95%', marginLeft: '15px', marginBottom: '15px' }}>
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={nameQuery}
+        onChange={handleNameSearch}
+        aria-label="חיפוש לפי שם"
       />
-      <main className="main-container">
-        <div className="search-bars" style={{ width: '95%', marginLeft: '15px', marginBottom: '15px' }}>
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={nameQuery}
-            onChange={handleNameSearch}
-          />
-          <input
-            type="text"
-            placeholder="Search by ID"
-            value={idQuery}
-            onChange={handleidSearch}
-          />
-        </div>
-        <div
-            className="table-container"
-            style={{
-              margin: "0",
-              padding: "0",
-              width: "100%",
-              overflowX: "auto",
-            }}
-          >
-            <table
-              className="customers-table"
-              style={{
-                width: "100%",
-                tableLayout: "fixed",
-                borderCollapse: "collapse",
-              }}
-            >
-              <thead>
-                <tr>
-                  <th style={{ backgroundColor: "#323232", color: "white", textAlign:'center' }}>שם מלא</th>
-                  <th style={{ backgroundColor: "#323232", color: "white", textAlign:'center' }}>מייל</th>
-                  <th style={{ backgroundColor: "#323232", color: "white", textAlign:'center' }}>תעודת זהות</th>
-                  <th style={{ backgroundColor: "#323232", color: "white", textAlign:'center' }}>ארץ</th>
-                  <th style={{ backgroundColor: "#323232", color: "white", textAlign:'center' }}>קביעת פגישה</th>
-                  <th style={{ backgroundColor: "#323232", color: "white", textAlign:'center' }}>מחיקה</th>
-                </tr>
-              </thead>
-              <tbody>
-                {displayedPeople.length > 0 ? (
-                  displayedPeople.map((person) => (
-                    <tr
-                      key={person._id}
-                      style={{
-                        backgroundColor: "whitesmoke",
-                        color: "black",
-                        textAlign: "center",
-                      }}
-                    >
-                      <td>{person.full_name}</td>
-                      <td>{person.email}</td>
-                      <td>{person.id}</td>
-                      <td>{person.country}</td>
-                      <td>
-                        <button
-                          onClick={() => handeleMeet(person)}
-                          style={{
-                            backgroundColor: "#4CAF50",
-                            color: "white",
-                            border: "none",
-                            padding: "5px 10px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          קביעת פגישה
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          className="delete"
-                          onClick={() => handleDelete(person)}
-                          style={{
-                            backgroundColor: "#C40C0C",
-                            color: "white",
-                            border: "none",
-                            padding: "5px 10px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          מחיקה
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="6" style={{ textAlign: "center", padding: "10px" }}>
-                      No clients found
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-      </main>
+      <input
+        type="text"
+        placeholder="Search by ID"
+        value={idQuery}
+        onChange={handleidSearch}
+        aria-label="חיפוש לפי תעודת זהות"
+      />
     </div>
+
+    <div
+      className="table-container"
+      role="region"
+      aria-labelledby="clients-table-title"
+      style={{ margin: "0", padding: "0", width: "100%", overflowX: "auto" }}
+    >
+      <h2 id="clients-table-title" className="visually-hidden">טבלת לקוחות</h2>
+
+      <table
+        className="customers-table"
+        role="table"
+        aria-label="טבלת לקוחות עם שם, מייל, תעודת זהות, ארץ ואפשרויות פעולה"
+        style={{ width: "100%", tableLayout: "fixed", borderCollapse: "collapse" }}
+      >
+        <thead>
+          <tr>
+            <th scope="col" style={{ backgroundColor: "#323232", color: "white", textAlign: 'center' }}>שם מלא</th>
+            <th scope="col" style={{ backgroundColor: "#323232", color: "white", textAlign: 'center' }}>מייל</th>
+            <th scope="col" style={{ backgroundColor: "#323232", color: "white", textAlign: 'center' }}>תעודת זהות</th>
+            <th scope="col" style={{ backgroundColor: "#323232", color: "white", textAlign: 'center' }}>ארץ</th>
+            <th scope="col" style={{ backgroundColor: "#323232", color: "white", textAlign: 'center' }}>קביעת פגישה</th>
+            <th scope="col" style={{ backgroundColor: "#323232", color: "white", textAlign: 'center' }}>מחיקה</th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayedPeople.length > 0 ? (
+            displayedPeople.map((person) => (
+              <tr
+                key={person._id}
+                tabIndex={0}
+                role="row"
+                aria-label={`שם: ${person.full_name}, מייל: ${person.email}, תעודת זהות: ${person.id}, ארץ: ${person.country}`}
+                style={{
+                  backgroundColor: "whitesmoke",
+                  color: "black",
+                  textAlign: "center",
+                }}
+              >
+                <td role="cell">{person.full_name}</td>
+                <td role="cell">{person.email}</td>
+                <td role="cell">{person.id}</td>
+                <td role="cell">{person.country}</td>
+                <td role="cell">
+                  <button
+                    onClick={() => handeleMeet(person)}
+                    aria-label={`קבע פגישה עם ${person.full_name}`}
+                    style={{
+                      backgroundColor: "#4CAF50",
+                      color: "white",
+                      border: "none",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    קביעת פגישה
+                  </button>
+                </td>
+                <td role="cell">
+                  <button
+                    className="delete"
+                    onClick={() => handleDelete(person)}
+                    aria-label={`מחק את ${person.full_name}`}
+                    style={{
+                      backgroundColor: "#C40C0C",
+                      color: "white",
+                      border: "none",
+                      padding: "5px 10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    מחיקה
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6" style={{ textAlign: "center", padding: "10px" }}>
+                No clients found
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
   );
 };
 

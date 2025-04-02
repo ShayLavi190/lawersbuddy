@@ -143,78 +143,93 @@ function Meetings() {
   
 
   return (
-    <div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
-      <Header OpenSidebar={OpenSidebar} />
-      <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
-      <main className="main-container">
-      <div className="table-container">
-          <table className="customers-table">
-            <thead>
-              <tr>
-                <th style={{backgroundColor:'#323232',textAlign:'center'}}>עורך דין</th>
-                <th style={{backgroundColor:'#323232',textAlign:'center'}}>תיאור</th>
-                <th style={{backgroundColor:'#323232',textAlign:'center'}}>תאריך</th>
-                <th style={{backgroundColor:'#323232',textAlign:'center'}}>שעה</th>
-                <th style={{backgroundColor:'#323232',textAlign:'center'}}>מיקום</th>
-                <th style={{backgroundColor:'#323232',textAlign:'center'}}></th>
+<div className="grid-container" style={{ backgroundColor: "#DDD0C8" }}>
+  <Header OpenSidebar={OpenSidebar} />
+  <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
 
-              </tr>
-            </thead>
-            <tbody>
-              {meetings.map((meeting) => (
-                <tr key={meeting._id} style={{ backgroundColor: 'whitesmoke', color: 'black' }}>
-                  <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.lawyer}</td>
-                  <td
-                    style={{
-                      textAlign: 'center',
-                      padding: '10px', 
-                      height: 'auto',
-                      wordWrap: 'break-word',
-                      whiteSpace: 'normal',
-                      maxWidth: '850px', 
-                    }}
-                  >
-                    {meeting.info}
-                  </td>
-                  <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.date}</td>
-                  <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.time}</td>
-                  <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.location}</td>
-                  <td>
-                    <button
-                      aria-label={`Edit ${meeting._id}`}
-                      onClick={() => handleEdit(meeting._id)}
-                      className="edit-button"
-                      style={{ alignItems: 'center', padding: '10px',marginLeft:'10px' }}
-                    >
-                      עריכה
-                    </button>
-                    <button
-                      aria-label={`Delete ${meeting._id}`}
-                      onClick={() => handleDelete(meeting._id)}
-                      className="delete-button"
-                      style={{ alignItems: 'center', padding: '10px',backgroundColor:'red' }}
-                    >
-                      מחיקה
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>     
-        </div>
-        <div>
-          <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          style={{ width: '600px', marginLeft:'370px',marginTop:'50px' }}
-          onClick={addNewFile}
-        >
-        צור פגישה חדשה  
-        </Button>        
-        </div>
-      </main>
+  <main className="main-container" role="main" aria-label="רשימת פגישות לניהול">
+    <div className="table-container" role="region" aria-labelledby="meetings-table-title">
+      <h2 id="meetings-table-title" className="visually-hidden">טבלת פגישות עם אפשרויות עריכה ומחיקה</h2>
+
+      <table
+        className="customers-table"
+        role="table"
+        aria-label="טבלת פגישות הכוללת עורך דין, תיאור, תאריך, שעה, מיקום ואפשרות עריכה ומחיקה"
+      >
+        <thead>
+          <tr>
+            <th scope="col" style={{ backgroundColor: '#323232', textAlign: 'center' }}>עורך דין</th>
+            <th scope="col" style={{ backgroundColor: '#323232', textAlign: 'center' }}>תיאור</th>
+            <th scope="col" style={{ backgroundColor: '#323232', textAlign: 'center' }}>תאריך</th>
+            <th scope="col" style={{ backgroundColor: '#323232', textAlign: 'center' }}>שעה</th>
+            <th scope="col" style={{ backgroundColor: '#323232', textAlign: 'center' }}>מיקום</th>
+            <th scope="col" style={{ backgroundColor: '#323232', textAlign: 'center' }}></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {meetings.map((meeting) => (
+            <tr
+              key={meeting._id}
+              tabIndex={0}
+              aria-label={`פגישה עם עו"ד ${meeting.lawyer}, תיאור: ${meeting.info}, בתאריך ${meeting.date} בשעה ${meeting.time} במקום ${meeting.location}`}
+              style={{ backgroundColor: 'whitesmoke', color: 'black' }}
+            >
+              <td>{meeting.lawyer}</td>
+              <td
+                style={{
+                  textAlign: 'center',
+                  padding: '10px',
+                  height: 'auto',
+                  wordWrap: 'break-word',
+                  whiteSpace: 'normal',
+                  maxWidth: '850px',
+                }}
+              >
+                {meeting.info}
+              </td>
+              <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.date}</td>
+              <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.time}</td>
+              <td style={{ textAlign: 'center', padding: '10px' }}>{meeting.location}</td>
+              <td style={{ textAlign: 'center' }}>
+                <button
+                  aria-label={`עריכת הפגישה עם עו"ד ${meeting.lawyer} בתאריך ${meeting.date}`}
+                  onClick={() => handleEdit(meeting._id)}
+                  className="edit-button"
+                  style={{ alignItems: 'center', padding: '10px', marginLeft: '10px' }}
+                >
+                  עריכה
+                </button>
+                <button
+                  aria-label={`מחיקת הפגישה עם עו"ד ${meeting.lawyer} בתאריך ${meeting.date}`}
+                  onClick={() => handleDelete(meeting._id)}
+                  className="delete-button"
+                  style={{ alignItems: 'center', padding: '10px', backgroundColor: 'red' }}
+                >
+                  מחיקה
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+
+    <div>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        style={{ width: '600px', marginLeft: '370px', marginTop: '50px' }}
+        onClick={addNewFile}
+        aria-label="צור פגישה חדשה"
+      >
+        צור פגישה חדשה  
+      </Button>
+    </div>
+  </main>
+</div>
+
   );
 }
 

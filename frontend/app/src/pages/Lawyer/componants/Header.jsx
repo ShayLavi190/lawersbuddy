@@ -57,21 +57,43 @@ function Header({ OpenSidebar }) {
   };
 
   return (
-    <header className='header' style={{backgroundColor:'#323232'}}>
-      <ToastContainer />
-      <div className='menu-icon' data-testid="menu-icon">
-        <BsJustify className='icon' onClick={OpenSidebar} />
-      </div>
-      <div className='header-left'>
-      </div>
-      <div className='header-right' data-testid="power-icon">
-        <BsPower className='icon' onClick={handleLogOut} tabIndex={0}   onKeyDown={(e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handleLogOut();
-    }
-  }} />
-      </div>
-    </header>
+<header
+  className="header"
+  role="banner"
+  aria-label="סרגל עליון"
+  style={{ backgroundColor: "#323232" }}
+>
+  <ToastContainer />
+  <div className="menu-icon" data-testid="menu-icon">
+    <BsJustify
+      className="icon"
+      onClick={OpenSidebar}
+      tabIndex={0}
+      aria-label="תפריט ניווט צדדי"
+      role="button"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          OpenSidebar();
+        }
+      }}
+    />
+  </div>
+  <div className="header-left" />
+  <div className="header-right" data-testid="power-icon">
+    <BsPower
+      className="icon"
+      onClick={handleLogOut}
+      tabIndex={0}
+      role="button"
+      aria-label="התנתק מהמערכת"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleLogOut();
+        }
+      }}
+    />
+  </div>
+</header>
   );
 }
 

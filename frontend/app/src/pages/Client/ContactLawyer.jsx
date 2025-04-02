@@ -49,7 +49,7 @@ function ContactLawyer() {
   };
 
   useEffect(() => {
-    emailjs.init(process.env.REACT_APP_EMAILJSINIT);
+    emailjs.init(process.env.REACT_APP_EMAILJSINIT2);
   }, []);
 
   useEffect(() => {
@@ -106,8 +106,8 @@ function ContactLawyer() {
     }
 
     try {
-      const serviceId = "bstorecontact";
-      const templateId = "order_c";
+      const serviceId = "service_lxiaq84";
+      const templateId = "template_kzggrep";
       const templateParams = {
         subject: subject,
         message: `Dear ${name},\n${description}\n`,

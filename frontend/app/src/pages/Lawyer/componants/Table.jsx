@@ -29,28 +29,30 @@ const DataTablef = ({ rows }) => {
   );
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="table with pagination">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">נתבע</TableCell>
-              <TableCell align="center">תובע</TableCell>
-              <TableCell align="center">מספר התיק</TableCell>
-              <TableCell align="center">תאריך פתיחת התיק</TableCell>
-              <TableCell align="center">סטאטוס</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
+    <Paper sx={{ width: "100%", overflow: "hidden" }} role="region" aria-label="טבלת תיקים עם עמודים">
+  <TableContainer>
+    <Table sx={{ minWidth: 650 }} aria-label="טבלה עם נתוני תיקים">
+      <TableHead>
+        <TableRow>
+          <TableCell align="center" scope="col">נתבע</TableCell>
+          <TableCell align="center" scope="col">תובע</TableCell>
+          <TableCell align="center" scope="col">מספר התיק</TableCell>
+          <TableCell align="center" scope="col">תאריך פתיחת התיק</TableCell>
+          <TableCell align="center" scope="col">סטאטוס</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
   {paginatedRows.map((row, index) => (
     <TableRow
       key={index}
       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      tabIndex={0}
+      aria-label={`תיק מספר ${row.caseId || "N/A"} של תובע ${row.attorneys?.plaintiff || "לא ידוע"} ונתבע ${row.attorneys?.defendant || "לא ידוע"}, נפתח בתאריך ${row.openDate || "לא ידוע"}, סטטוס: ${row.status || "לא ידוע"}`}
     >
-      <TableCell align="center">{row.attorneys?.defendant || "N/A"}</TableCell>
-      <TableCell align="center">{row.attorneys?.plaintiff || "N/A"}</TableCell>
-      <TableCell align="center">{row.caseId || "N/A"}</TableCell>
-      <TableCell align="center">
+      <TableCell align="center" role="cell">{row.attorneys?.defendant || "N/A"}</TableCell>
+      <TableCell align="center" role="cell">{row.attorneys?.plaintiff || "N/A"}</TableCell>
+      <TableCell align="center" role="cell">{row.caseId || "N/A"}</TableCell>
+      <TableCell align="center" role="cell">
         {row.openDate
           ? (() => {
               const date = new Date(row.openDate);
@@ -61,24 +63,26 @@ const DataTablef = ({ rows }) => {
             })()
           : "N/A"}
       </TableCell>
-      <TableCell align="center">{row.status || "N/A"}</TableCell>
+      <TableCell align="center" role="cell">{row.status || "N/A"}</TableCell>
     </TableRow>
   ))}
 </TableBody>
 
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        tabIndex={0}
-      />
-    </Paper>
+    </Table>
+  </TableContainer>
+
+  <TablePagination
+    rowsPerPageOptions={[5, 10, 25]}
+    component="div"
+    count={rows.length}
+    rowsPerPage={rowsPerPage}
+    page={page}
+    onPageChange={handleChangePage}
+    onRowsPerPageChange={handleChangeRowsPerPage}
+    aria-label="ניווט עמודים בטבלה"
+  />
+</Paper>
+
   );
 };
 

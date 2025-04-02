@@ -120,72 +120,100 @@ function Home() {
   
   return (
     <div className="grid-container">
-      <Header OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)} />
-      <Sidebar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)}
-      />
-      <main className="main-container" style={{ backgroundColor: "#DDD0C8" }}>
-        {/* Cards Section */}
-        <div className="main-cards">
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl" }}>
-            <div className="card-inner">
-              <h3>תיקים פתוחים</h3>
-              <BsArrowRepeat className="card_icon" />
-            </div>
-            <h1>{ProcessesnumberO}</h1>
-          </div>
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl" }}>
-            <div className="card-inner">
-              <h3>תיקים סגורים</h3>
-              <BsCheckCircle className="card_icon" />
-            </div>
-            <h1>{ProcessesnumberC}</h1>
-          </div>
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl" }}>
-            <div className="card-inner">
-              <h3>לקוחות</h3>
-              <BsPeopleFill className="card_icon" />
-            </div>
-            <h1>{Usersnumber}</h1>
-          </div>
-          <div className="card" style={{ backgroundColor: "#99775C", direction: "rtl" }}>
-            <div className="card-inner">
-              <h3 style={{ direction: "rtl" }}>תשלומים שבוצעו</h3>
-              <BsCash className="card_icon" style={{ direction: "ltr" }} />
-            </div>
-            <h1>{MoneyCollected}</h1>
-          </div>
+  <Header OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)} />
+  <Sidebar
+    openSidebarToggle={openSidebarToggle}
+    OpenSidebar={() => setOpenSidebarToggle(!openSidebarToggle)}
+  />
+  <main className="main-container" style={{ backgroundColor: "#DDD0C8" }} role="main">
+    {/* Cards Section */}
+    <section
+      className="main-cards"
+      aria-label="סטטיסטיקות כלליות"
+    >
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        tabIndex={0}
+        aria-label={`כמות תיקים פתוחים: ${ProcessesnumberO}`}
+      >
+        <div className="card-inner">
+          <h3>תיקים פתוחים</h3>
+          <BsArrowRepeat className="card_icon" />
         </div>
-          {/* Data Table */}
-          <div>
-            <h3
-              style={{
-                textAlign: "center",
-                fontSize: "25px",
-                marginBottom: "20px",
-              }}
-              sx = {{color: isHighContrast ? "#ffff00" : "#323232"}}
-            >
-              תיקים
-            </h3>
-            <DataTablef rows={files} />
-          </div>
-          <div>
-            <h3
-              style={{
-                textAlign: "center",
-                fontSize: "25px",
-                marginBottom: "20px",
-              }}
-              sx = {{color: isHighContrast ? "#ffff00" : "#323232"}}
-            >
-              פגישות קרובות
-            </h3>
-            <TableDates rows={appointments} />
-          </div>
-      </main>
-    </div>
+        <h1>{ProcessesnumberO}</h1>
+      </div>
+
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        tabIndex={0}
+        aria-label={`כמות תיקים סגורים: ${ProcessesnumberC}`}
+      >
+        <div className="card-inner">
+          <h3>תיקים סגורים</h3>
+          <BsCheckCircle className="card_icon" />
+        </div>
+        <h1>{ProcessesnumberC}</h1>
+      </div>
+
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        tabIndex={0}
+        aria-label={`כמות לקוחות: ${Usersnumber}`}
+      >
+        <div className="card-inner">
+          <h3>לקוחות</h3>
+          <BsPeopleFill className="card_icon" />
+        </div>
+        <h1>{Usersnumber}</h1>
+      </div>
+
+      <div
+        className="card"
+        style={{ backgroundColor: "#99775C", direction: "rtl" }}
+        tabIndex={0}
+        aria-label={`סכום תשלומים שבוצעו: ${MoneyCollected} ש"ח`}
+      >
+        <div className="card-inner">
+          <h3 style={{ direction: "rtl" }}>תשלומים שבוצעו</h3>
+          <BsCash className="card_icon" style={{ direction: "ltr" }} />
+        </div>
+        <h1>{MoneyCollected}</h1>
+      </div>
+    </section>
+
+    {/* Data Table */}
+    <section aria-labelledby="cases-heading">
+      <h3
+        id="cases-heading"
+        style={{
+          textAlign: "center",
+          fontSize: "25px",
+          marginBottom: "20px",
+        }}
+      >
+        תיקים
+      </h3>
+      <DataTablef rows={files} />
+    </section>
+
+    <section aria-labelledby="meetings-heading">
+      <h3
+        id="meetings-heading"
+        style={{
+          textAlign: "center",
+          fontSize: "25px",
+          marginBottom: "20px",
+        }}
+      >
+        פגישות קרובות
+      </h3>
+      <TableDates rows={appointments} />
+    </section>
+  </main>
+</div>
   );
 }
 
