@@ -16,11 +16,30 @@ body.high-contrast p {
   color: #ffff00;
 }
 
+body.high-contrast button:focus,
+body.high-contrast input:focus,
+body.high-contrast select:focus,
+body.high-contrast textarea:focus {
+  outline: 3px solid #ffff00;
+  outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+  outline: 3px solid #0075eb;
+  outline-offset: 2px;
+}
+
 body.high-contrast form {
   background-color: #111111;
 }
 
-body.high-contrast input {
+body.high-contrast input,
+body.high-contrast select,
+body.high-contrast textarea {
   background-color: #222222;
   color: #ffff00;
   border: 1px solid #ffff00;
@@ -66,7 +85,9 @@ body.large-text button {
   padding: 14px 50px;
 }
 
-body.large-text input {
+body.large-text input,
+body.large-text select,
+body.large-text textarea {
   font-size: 16px;
   padding: 14px 18px;
 }
@@ -86,10 +107,6 @@ button {
 
 button:active {
   transform: scale(0.95);
-}
-
-button:focus {
-  outline: none;
 }
 
 button.ghost {

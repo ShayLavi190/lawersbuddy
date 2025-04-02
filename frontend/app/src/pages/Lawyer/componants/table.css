@@ -1,0 +1,21 @@
+/* הגדלת טקסט עבור טבלה */
+body.large-text .MuiTableCell-root {
+    font-size: 1.2rem !important;
+  }
+  
+  /* ניגודיות גבוהה */
+  body.high-contrast .MuiTableCell-root {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border-color: #ffff00 !important;
+  }
+  
+  body.high-contrast .MuiTablePagination-root {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+  }
+  
+  body.large-text .MuiTablePagination-root {
+    font-size: 1.1rem !important;
+  }
+  

@@ -1,0 +1,62 @@
+/* עיצוב בסיסי */
+#sidebar {
+  background-color: #323232;
+  color: white;
+}
+
+.sidebar-list-item {
+  color: white;
+  font-size: 20px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* :focus למקלדת */
+.sidebar-list-item:focus {
+  outline: 3px solid #0075eb;
+  outline-offset: 2px;
+  background-color: #444;
+}
+
+/* מצב ניגודיות גבוהה */
+body.high-contrast #sidebar {
+  background-color: #000;
+  color: #ffff00;
+}
+
+body.high-contrast .sidebar-list-item {
+  color: #ffff00;
+  background-color: #000;
+}
+
+body.high-contrast .sidebar-list-item:hover {
+  background-color: #222;
+}
+
+body.high-contrast .sidebar-list-item:focus {
+  outline: 3px solid #ffff00;
+  outline-offset: 2px;
+  background-color: #111;
+}
+
+/* הגדלת טקסט */
+body.large-text .sidebar-list-item {
+  font-size: 24px;
+}
+
+/* אייקונים */
+.sidebar-list-item .icon {
+  font-size: 1.2rem;
+}
+
+body.large-text .sidebar-list-item .icon {
+  font-size: 1.6rem;
+}
+
+body.high-contrast .sidebar-list-item .icon {
+  color: #ffff00 !important;
+}

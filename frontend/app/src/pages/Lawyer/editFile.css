@@ -1,0 +1,120 @@
+/* ניגודיות גבוהה */
+body.high-contrast {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+  }
+  
+  body.high-contrast input,
+  body.high-contrast select,
+  body.high-contrast textarea {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border: 1px solid #ffff00 !important;
+  }
+  
+  body.high-contrast label {
+    color: #ffff00 !important;
+  }
+  
+  body.high-contrast button {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border: 1px solid #ffff00 !important;
+  }
+  
+  body.high-contrast .dropzone,
+  body.high-contrast .MuiSelect-select,
+  body.high-contrast .MuiInputBase-input {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+  }
+  
+  /* טקסט מוגדל */
+  body.large-text {
+    font-size: 18px;
+  }
+  
+  body.large-text input,
+  body.large-text select,
+  body.large-text textarea,
+  body.large-text button,
+  body.large-text label {
+    font-size: 18px !important;
+  }
+  /* תמיכה כללית */
+body.high-contrast {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
+}
+
+body.high-contrast button,
+body.high-contrast .btn,
+body.high-contrast .flowbite-btn {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
+}
+
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4,
+body.high-contrast h5,
+body.high-contrast p,
+body.high-contrast label {
+  color: #ffff00 !important;
+}
+
+body.high-contrast iframe {
+  background-color: #000 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+body.high-contrast a {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+
+/* הגדלת טקסט */
+body.large-text h1 {
+  font-size: 32px !important;
+}
+body.large-text h2,
+body.large-text h3 {
+  font-size: 24px !important;
+}
+body.large-text p,
+body.large-text li,
+body.large-text label,
+body.large-text input,
+body.large-text button {
+  font-size: 18px !important;
+}
+body.large-text input[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+/* כפתור משימה קטן */
+body.high-contrast .flowbite-btn,
+body.high-contrast .flowbite-btn-sm {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
+}
+
+/* קו אנכי וצורת לוח שנה */
+body.high-contrast .timeline-line {
+  background-color: #ffff00 !important;
+}
+body.high-contrast .timeline-icon {
+  background-color: #ffff00 !important;
+  color: #000 !important;
+}

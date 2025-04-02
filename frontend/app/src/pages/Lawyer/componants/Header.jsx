@@ -65,7 +65,11 @@ function Header({ OpenSidebar }) {
       <div className='header-left'>
       </div>
       <div className='header-right' data-testid="power-icon">
-        <BsPower className='icon' onClick={handleLogOut} />
+        <BsPower className='icon' onClick={handleLogOut} tabIndex={0}   onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleLogOut();
+    }
+  }} />
       </div>
     </header>
   );

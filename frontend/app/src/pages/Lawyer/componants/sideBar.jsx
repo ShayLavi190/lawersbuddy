@@ -112,6 +112,12 @@ function Sidebar() {
               data-testid={`link-${item.label.toLowerCase()}`}
               onClick={() => navigate(item.path, { replace: true })}
               style={{ cursor: 'pointer', marginLeft:'5px' }}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  navigate(item.path, { replace: true });
+                }
+              }}
             >
               <item.icon
                 className="icon"

@@ -11,20 +11,18 @@ body {
   line-height: 1px;
   font-size: 20px;
 }
-input.MuiInputBase-input, 
-textarea.MuiInputBase-input {
-  text-align: center !important;
-}
 
 .icon:hover {
   box-shadow: #ffffff;
   opacity: 0.5;
 }
+
 .icon_header {
   vertical-align: middle;
   line-height: 1px;
   font-size: 26px;
 }
+
 .icon,
 .icon_header {
   margin-right: 5px;
@@ -46,15 +44,16 @@ textarea.MuiInputBase-input {
     "sidebar main main main";
   height: 100vh;
 }
-/* Edit Form CSS*/
-/* Style the form rows */
 
 /* Main container styling */
 .main-container {
   padding: 20px;
+  grid-area: main;
+  overflow-y: auto;
+  color: rgba(255, 255, 255, 0.95);
 }
 
-/* Modal form styles */
+/* Form Styling */
 .form-row {
   display: flex;
   flex-direction: column;
@@ -64,7 +63,6 @@ textarea.MuiInputBase-input {
   margin-right: 50px;
 }
 
-/* Label styling */
 .form-row label {
   text-align: left;
   display: flex;
@@ -74,7 +72,6 @@ textarea.MuiInputBase-input {
   font-weight: bold;
 }
 
-/* Input field styling */
 .form-row input {
   padding: 8px;
   border: 1px solid #ccc;
@@ -83,14 +80,18 @@ textarea.MuiInputBase-input {
   max-width: 320px;
 }
 
-/* Error message styling */
+input.MuiInputBase-input,
+textarea.MuiInputBase-input {
+  text-align: center !important;
+}
+
 .error {
   color: red;
   font-size: 12px;
   margin-top: 5px;
 }
 
-/* Button group styling */
+/* Button group */
 .button-group {
   display: flex;
   justify-content: space-between;
@@ -124,7 +125,7 @@ textarea.MuiInputBase-input {
   color: #fff;
 }
 
-/* Sidebar toggle styling */
+/* Sidebar toggle */
 .sidebar-toggle {
   background-color: #007bff;
   color: #fff;
@@ -138,9 +139,7 @@ textarea.MuiInputBase-input {
   background-color: #0056b3;
 }
 
-/* end Edit Form CSS*/
-
-/* status button*/
+/* Status buttons */
 .filter-button-div {
   display: inline-block;
   box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
@@ -156,7 +155,6 @@ textarea.MuiInputBase-input {
   padding: 10px;
   min-width: 90px;
   cursor: pointer;
-
 }
 
 .filter-button.active {
@@ -168,25 +166,23 @@ textarea.MuiInputBase-input {
   background-color: #74977b;
   color: white;
 }
-/* end status button*/
 
-/* Header  */
+/* Header */
 .header {
   grid-area: header;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px 0 30px;
+  padding: 0 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
 }
 
 .menu-icon {
   display: none;
 }
-/* End Header  */
 
-/* Sidebar  */
+/* Sidebar */
 #sidebar {
   grid-area: sidebar;
   height: 100%;
@@ -220,7 +216,7 @@ textarea.MuiInputBase-input {
 }
 
 .sidebar-list-item {
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
   font-size: 18px;
 }
 
@@ -237,32 +233,10 @@ textarea.MuiInputBase-input {
 .sidebar-responsive {
   display: inline !important;
   position: absolute;
-  /*
-      we want the z-index of the sidebar higher so that
-      the charts are not showing over the sidebar 
-      on small screens
-    */
   z-index: 12 !important;
 }
 
-/* End Sidebar  */
-
-/* Main  */
-.main-container {
-  grid-area: main;
-  overflow-y: auto;
-  padding: 20px 20px;
-  color: rgba(255, 255, 255, 0.95);
-}
-.cancelBtn:hover {
-  background-color: #8d2c2a;
-}
-
-.main-title {
-  display: flex;
-  justify-content: space-between;
-}
-
+/* Cards */
 .main-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -304,6 +278,7 @@ textarea.MuiInputBase-input {
   font-size: 25px;
 }
 
+/* Charts */
 .charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -312,10 +287,90 @@ textarea.MuiInputBase-input {
   height: 300px;
 }
 
-/* End Main  */
+/* Focus outline for keyboard navigation */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+  outline: 3px solid #0075eb;
+  outline-offset: 2px;
+}
 
-/* Medium <= 992px */
+/* ניגודיות גבוהה */
+body.high-contrast {
+  background-color: #000;
+  color: #ffff00;
+}
 
+body.high-contrast .main-container,
+body.high-contrast .form-row label,
+body.high-contrast input,
+body.high-contrast .button-group .button,
+body.high-contrast .card,
+body.high-contrast .header,
+body.high-contrast .sidebar-list-item,
+body.high-contrast .sidebar-list-item > a {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+body.high-contrast input {
+  border: 1px solid #ffff00;
+}
+
+body.high-contrast .sidebar-list-item:hover {
+  background-color: #222;
+}
+
+body.high-contrast .button-group .save-button {
+  background-color: #222;
+}
+
+body.high-contrast .button-group .cancel-button {
+  background-color: #400;
+}
+
+body.high-contrast .icon,
+body.high-contrast .icon_header {
+  color: #ffff00 !important;
+}
+
+body.high-contrast button:focus,
+body.high-contrast input:focus,
+body.high-contrast select:focus,
+body.high-contrast textarea:focus,
+body.high-contrast a:focus {
+  outline: 3px solid #ffff00;
+  outline-offset: 2px;
+}
+
+/* טקסט מוגדל */
+body.large-text,
+body.large-text .main-container,
+body.large-text .form-row,
+body.large-text .button-group .button,
+body.large-text input,
+body.large-text .card,
+body.large-text .header,
+body.large-text label,
+body.large-text select,
+body.large-text textarea,
+body.large-text .sidebar-list-item {
+  font-size: 18px !important;
+}
+
+body.large-text .icon,
+body.large-text .icon_header {
+  font-size: 28px !important;
+}
+
+body.large-text .card-inner > .card_icon {
+  font-size: 35px;
+}
+
+/* Responsive */
 @media screen and (max-width: 992px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -337,70 +392,6 @@ textarea.MuiInputBase-input {
     display: inline;
   }
 }
-/* ניגודיות גבוהה */
-body.high-contrast {
-  background-color: #000000;
-  color: #ffff00;
-}
-
-body.high-contrast .main-container,
-body.high-contrast .sidebar-list-item,
-body.high-contrast .form-row label,
-body.high-contrast input,
-body.high-contrast .button-group .button,
-body.high-contrast .sidebar-list-item > a,
-body.high-contrast .card,
-body.high-contrast .header {
-  background-color: #000 !important;
-  color: #ffff00 !important;
-  border-color: #ffff00 !important;
-}
-
-body.high-contrast input {
-  border: 1px solid #ffff00;
-}
-
-body.high-contrast .sidebar-list-item:hover {
-  background-color: #222;
-}
-
-body.high-contrast .button-group .save-button {
-  background-color: #222;
-}
-
-body.high-contrast .button-group .cancel-button {
-  background-color: #400;
-}
-/* טקסט מוגדל */
-body.large-text,
-body.large-text .main-container,
-body.large-text .form-row,
-body.large-text .sidebar-list-item,
-body.large-text .button-group .button,
-body.large-text input,
-body.large-text .card,
-body.large-text .header,
-body.large-text label,
-body.large-text select,
-body.large-text textarea {
-  font-size: 18px !important;
-}
-
-body.large-text .icon,
-body.large-text .icon_header {
-  font-size: 28px !important;
-}
-
-body.large-text .card-inner > .card_icon {
-  font-size: 35px;
-}
-
-body.high-contrast .icon,
-body.high-contrast .icon_header {
-  color: #ffff00 !important;
-}
-
-/* Small <= 768px */
 
 @media screen and (max-width: 768px) {
   .main-cards {
@@ -415,11 +406,8 @@ body.high-contrast .icon_header {
   }
 }
 
-/* Extra Small <= 576px */
-
 @media screen and (max-width: 576px) {
   .hedaer-left {
     display: none;
   }
 }
-

@@ -76,6 +76,7 @@ const DataTablef = ({ rows }) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        tabIndex={0}
       />
     </Paper>
   );
